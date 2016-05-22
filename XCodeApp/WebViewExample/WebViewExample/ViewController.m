@@ -25,7 +25,7 @@
     _webView.navigationDelegate = self;
 
     //configure a request URL to load
-    NSString *startUrl = @"http://localhost:8100";
+    NSString *startUrl = @"http://www.google.com";
     [self webViewTo:startUrl];
     [self urlChangedTo:startUrl];
     [_webViewContainer addSubview:_webView];
@@ -67,6 +67,9 @@
 
 
 
+- (IBAction)navigateBack:(id)sender {
+    [_webView goBack];
+}
 
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -100,6 +103,8 @@
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    NSString *url = _webView.URL.absoluteString;
+    [_urlField setText:url];
 
 }
 
